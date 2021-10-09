@@ -1,4 +1,5 @@
 import IsmStack from "./IsmStack";
+import IsmApiStack from './IsmApiStack';
 
 export default function main(app) {
   // Set default runtime for all functions
@@ -6,7 +7,11 @@ export default function main(app) {
     runtime: "nodejs12.x"
   });
 
-  new IsmStack(app, "ism-stack");
+  const ismStack = new IsmStack(app, "ism-stack");
+
+  new IsmApiStack(app, 'ism-api', {
+    table: ismStack.ismTable
+  });
 
   // Add more stacks
 }
